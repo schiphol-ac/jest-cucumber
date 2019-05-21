@@ -204,7 +204,8 @@ export const parseFeature = (featureText: string, options?: Options): ParsedFeat
 export const loadFeature = (featureFilePath: string, options?: Options) => {
     options = getJestCucumberConfiguration(options);
 
-    const dirOfCaller = dirname(callsites()[1].getFileName() || '');
+	const traceCaller = callsites()[1];
+    const dirOfCaller = dirname(traceCaller ? traceCaller.getFileName() : '');
     const absoluteFeatureFilePath = resolve(options.loadRelativePath ? dirOfCaller : '', featureFilePath);
 
     try {
